@@ -1,0 +1,56 @@
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Student Form</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" formControlName="Name">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"
+        formControlName="Email"><br>
+      <div>
+        <label class="form-label select-label">Stream</label>&nbsp;
+        <select name='option' style="display: inline;" formControlName="Stream">
+          <option>option1</option>
+          <option>option2</option>
+          <option>option3</option>
+        </select>
+      </div>
+      <br>
+      <button>Submit</button>
+    </form>
+  </div>
+
+</body>
+
+</html> -->
+
+<ul>
+  <ng-container *ngFor="let menuItem of menuItems">
+    <li>{{ menuItem.name }}</li>
+    <ng-container *ngTemplateOutlet="menuItemTemplate; context: { $implicit: menuItem }"></ng-container>
+  </ng-container>
+</ul>
+
+<ng-template #menuItemTemplate let-menuItem>
+  <ul *ngIf="menuItem.children && menuItem.children.length > 0">
+    <ng-container *ngFor="let childItem of menuItem.children">
+      <li>{{ childItem.name }}</li>
+      <ng-container *ngTemplateOutlet="menuItemTemplate; context: { $implicit: childItem }"></ng-container>
+    </ng-container>
+  </ul>
+</ng-template>
